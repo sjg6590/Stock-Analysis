@@ -41,7 +41,8 @@ class ThinkScriptGenerator:
         return r["message"]["content"]
 
     def _strip_fences(self, text: str) -> str:
-        t = re.sub(r"```(?:thinkscript|text)?\s*", "", text, flags=re.IGNORECASE).strip()
+        t = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+        t = re.sub(r"```(?:thinkscript|text)?\s*", "", t, flags=re.IGNORECASE).strip()
         return t.replace("```", "").strip()
 
     def _validate(self, code: str) -> bool:

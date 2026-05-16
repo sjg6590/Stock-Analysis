@@ -26,3 +26,6 @@ exports/
 
 # Streamlit
 .streamlit/
+
+# Generated ThinkScript output
+thinkscripts/
