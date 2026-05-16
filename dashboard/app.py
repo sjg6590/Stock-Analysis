@@ -7,7 +7,6 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as st_components
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -32,18 +31,17 @@ st.set_page_config(page_title="AI Stock Analyzer", layout="wide")
 
 
 def _inject_chat_fab() -> None:
-    """Inject a zero-height component that uses JS to pin the 💬 button to the bottom-right.
+    """Inject JS to pin the 💬 button to the bottom-right.
 
-    Uses window.parent.document to reach the Streamlit page DOM and finds the button
-    by its exact text content, so no other button is affected.
+    Finds the button by its exact text content, so no other button is affected.
     """
-    st_components.html(
+    st.html(
         """
         <script>
         (function () {
             function applyFab() {
                 try {
-                    const btns = window.parent.document.querySelectorAll(
+                    const btns = document.querySelectorAll(
                         'button[kind="secondary"]'
                     );
                     for (const btn of btns) {
@@ -80,12 +78,11 @@ def _inject_chat_fab() -> None:
             }
             applyFab();
             const obs = new MutationObserver(applyFab);
-            obs.observe(window.parent.document.body, { childList: true, subtree: true });
+            obs.observe(document.body, { childList: true, subtree: true });
         })();
         </script>
         """,
-        height=0,
-        scrolling=False,
+        unsafe_allow_javascript=True,
     )
 
 
