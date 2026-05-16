@@ -1,0 +1,28 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment and secrets
+.env
+schwab_token.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Data / local DB
+*.db
+data/sec_filings/
+exports/
+
+# IDE
+.idea/
+.vscode/
+
+# Streamlit
+.streamlit/
